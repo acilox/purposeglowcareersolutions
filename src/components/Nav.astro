@@ -1,17 +1,18 @@
 ---
 import { site } from '../data/site';
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const links = [
+  { href: '#glowup', label: 'Before & After' },
   { href: '#services', label: 'Services' },
-  { href: '#process', label: 'How It Works' },
   { href: '#about', label: 'About' },
   { href: '#results', label: 'Results' },
-  { href: '#faq', label: 'FAQ' },
+  { href: `${base}/checklist`, label: 'Free Guide' },
 ];
 ---
 
 <header class="fixed top-0 inset-x-0 z-40">
-  <nav class="glass border-b border-white/50">
+  <nav id="siteNav" class="glass border-b border-white/50">
     <div class="container-x flex items-center justify-between h-[4.5rem]">
       <a href="#top" class="flex items-center gap-2.5 font-display text-lg font-semibold text-plum">
         <span class="grid place-items-center w-9 h-9 rounded-xl bg-gradient-glow text-white text-lg">✦</span>
@@ -25,7 +26,7 @@ const links = [
       </ul>
 
       <div class="flex items-center gap-3">
-        <a href={site.intakeForm} target="_blank" rel="noopener" class="btn btn-primary hidden sm:inline-flex !py-2.5 !px-5 text-sm">
+        <a href={site.intakeForm} target="_blank" rel="noopener" data-magnetic class="btn btn-primary hidden sm:inline-flex !py-2.5 !px-5 text-sm">
           Start Your Glow Up
         </a>
         <button id="navToggle" class="md:hidden grid place-items-center w-10 h-10 rounded-lg border border-lavender bg-white/70" aria-label="Menu" aria-expanded="false">

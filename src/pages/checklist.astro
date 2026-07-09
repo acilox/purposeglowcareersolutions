@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const groups = [
+  {
+    title: '1. Header & contact',
+    items: [
+      'Full name is the largest text on the page',
+      'Professional email address (not a nickname)',
+      'Phone number and city/state (no full street address)',
+      'LinkedIn URL — customized and matching your résumé',
+      'Target job title clearly stated near the top',
+    ],
+  },
+  {
+    title: '2. Beat the ATS',
+    items: [
+      'Keywords pulled straight from the job description',
+      'Standard section headings (Experience, Skills, Education)',
+      'Simple layout — no tables, text boxes, or columns that confuse parsers',
+      'Saved and sent as the format they ask for (usually PDF or Word)',
+      'One clean, common font throughout',
+    ],
+  },
+  {
+    title: '3. Content that converts',
+    items: [
+      'Every bullet starts with a strong action verb',
+      'Results are quantified with numbers, %, or $',
+      'Most relevant experience is highest on the page',
+      'A short summary that positions you for the role you want',
+      'No vague “responsible for…” — show impact, not duties',
+    ],
+  },
+  {
+    title: '4. Final polish',
+    items: [
+      'Zero typos — read it out loud, then have someone else check',
+      'Consistent tense, spacing, and bullet style',
+      'One page (two only if you have 10+ years of experience)',
+      'Plenty of white space so it reads in 6 seconds',
+      'File named professionally, e.g. “Jordan-Reyes-Resume.pdf”',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Free Résumé Glow-Up Checklist | Purpose & Glow Career Solutions"
+  description="A free 20-point checklist to make your résumé ATS-friendly and interview-ready — from Nicole at Purpose & Glow Career Solutions."
+>
+  <main id="main" class="pt-28 pb-16">
+    <div class="container-x max-w-3xl">
+      <a href={`${base}/`} class="text-sm text-violet font-medium hover:underline">← Back to home</a>
+
+      <div class="mt-6 text-center reveal">
+        <span class="chip">Free resource</span>
+        <h1 class="display-2 mt-4">The Résumé Glow-Up Checklist</h1>
+        <p class="mt-4 text-lg text-ink/75 max-w-xl mx-auto">
+          20 quick checks to make your résumé ATS-friendly and interview-ready. Tick them off — then let me
+          handle the heavy lifting.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3 justify-center print:hidden">
+          <button id="printBtn" class="btn btn-primary" data-magnetic>Print / Save as PDF</button>
+          <a href={site.intakeForm} target="_blank" rel="noopener" class="btn btn-ghost">Have Nicole do it →</a>
+        </div>
+      </div>
+
+      <div class="mt-10 grid sm:grid-cols-2 gap-5">
+        {groups.map((g, i) => (
+          <div class={`card p-6 reveal reveal-delay-${(i % 3) + 1}`}>
+            <h2 class="text-xl text-plum">{g.title}</h2>
+            <ul class="mt-4 space-y-3">
+              {g.items.map((item) => (
+                <li class="flex gap-3 text-sm text-ink/80">
+                  <span class="mt-0.5 w-5 h-5 rounded-md border-2 border-lavender shrink-0"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-10 border-glow p-8 text-center reveal">
+        <h2 class="text-2xl">Want it done for you?</h2>
+        <p class="mt-3 text-ink/70 max-w-lg mx-auto">
+          Skip the guesswork. I'll craft an ATS-friendly, achievement-focused résumé tailored to your goals —
+          usually within 24 hours.
+        </p>
+        <a href={site.intakeForm} target="_blank" rel="noopener" class="btn btn-primary mt-6" data-magnetic>Start Your Glow Up ✦</a>
+      </div>
+    </div>
+  </main>
+
+  <script is:inline>
+    document.getElementById('printBtn')?.addEventListener('click', () => window.print());
+  </script>
+</BaseLayout>

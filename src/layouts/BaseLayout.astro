@@ -68,6 +68,7 @@ const jsonLd = {
     <set:html value={`<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`} />
   </head>
   <body>
+    <div id="scrollBar" aria-hidden="true"></div>
     <div class="glow-field" aria-hidden="true">
       <span class="glow-orb glow-orb--1 floaty"></span>
       <span class="glow-orb glow-orb--2"></span>
@@ -138,6 +139,52 @@ const jsonLd = {
         menu.querySelectorAll('a').forEach((a) =>
           a.addEventListener('click', () => menu.classList.add('hidden'))
         );
+      })();
+
+      // Scroll progress bar + nav shadow.
+      (function () {
+        const bar = document.getElementById('scrollBar');
+        const nav = document.getElementById('siteNav');
+        const onScroll = () => {
+          const h = document.documentElement;
+          const max = h.scrollHeight - h.clientHeight;
+          const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+          if (bar) bar.style.width = pct + '%';
+          if (nav) nav.classList.toggle('scrolled', h.scrollTop > 12);
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+      })();
+
+      // Magnetic buttons (pointer only, respects reduced-motion).
+      (function () {
+        const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (rm || !window.matchMedia('(pointer:fine)').matches) return;
+        document.querySelectorAll('[data-magnetic]').forEach((el) => {
+          el.addEventListener('pointermove', (e) => {
+            const r = el.getBoundingClientRect();
+            const x = e.clientX - r.left - r.width / 2;
+            const y = e.clientY - r.top - r.height / 2;
+            el.style.transform = `translate(${x * 0.18}px, ${y * 0.28}px)`;
+          });
+          el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+        });
+      })();
+
+      // Before/After comparison slider(s).
+      (function () {
+        document.querySelectorAll('[data-ba]').forEach((root) => {
+          const before = root.querySelector('.ba__before');
+          const handle = root.querySelector('.ba__handle');
+          const range = root.querySelector('.ba__range');
+          if (!before || !handle || !range) return;
+          const set = (v) => {
+            before.style.clipPath = `inset(0 ${100 - v}% 0 0)`;
+            handle.style.left = v + '%';
+          };
+          set(50);
+          range.addEventListener('input', (e) => set(Number(e.target.value)));
+        });
       })();
     </script>
   </body>

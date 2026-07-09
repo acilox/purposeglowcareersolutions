@@ -30,7 +30,7 @@
 /* ---------- Base ---------- */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5.5rem; /* offset sticky nav on anchor jumps */
+  scroll-padding-top: 5.5rem;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -44,10 +44,7 @@ body {
   overflow-x: hidden;
 }
 
-::selection {
-  background: var(--color-lavender);
-  color: var(--color-plum);
-}
+::selection { background: var(--color-lavender); color: var(--color-plum); }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
@@ -57,7 +54,6 @@ h1, h2, h3, h4 {
   line-height: 1.08;
 }
 
-/* Fluid display type */
 .display-1 { font-size: clamp(2.6rem, 6vw, 4.75rem); }
 .display-2 { font-size: clamp(2rem, 4.5vw, 3.25rem); }
 .eyebrow {
@@ -68,21 +64,31 @@ h1, h2, h3, h4 {
   font-size: 0.78rem;
 }
 
-/* ---------- Glow background ---------- */
-/* Soft radial "glow" orbs fixed behind everything — zero image weight. */
-.glow-field {
+/* ---------- Premium texture: film grain overlay ---------- */
+body::after {
+  content: "";
   position: fixed;
   inset: 0;
-  z-index: -1;
-  overflow: hidden;
+  z-index: 9999;
   pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.glow-orb {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(80px);
-  opacity: 0.55;
+
+/* ---------- Scroll progress bar ---------- */
+#scrollBar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  z-index: 50;
+  background: linear-gradient(90deg, var(--color-violet), var(--color-rose-bright), var(--color-glow));
+  transition: width 0.08s linear;
 }
+
+/* ---------- Glow background ---------- */
+.glow-field { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.glow-orb { position: absolute; border-radius: 9999px; filter: blur(80px); opacity: 0.55; }
 .glow-orb--1 { width: 40rem; height: 40rem; top: -12rem; right: -10rem;
   background: radial-gradient(circle at 30% 30%, #ddd6fe, transparent 70%); }
 .glow-orb--2 { width: 34rem; height: 34rem; top: 30%; left: -14rem;
@@ -93,40 +99,54 @@ h1, h2, h3, h4 {
 /* ---------- Gradient helpers ---------- */
 .text-gradient {
   background: linear-gradient(100deg, var(--color-violet) 0%, var(--color-rose-bright) 55%, var(--color-glow) 100%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: gradient-shift 6s ease-in-out infinite;
 }
+@keyframes gradient-shift { 0%,100% { background-position: 0% center; } 50% { background-position: 100% center; } }
+
 .bg-gradient-glow {
   background: linear-gradient(120deg, var(--color-violet) 0%, var(--color-rose) 60%, var(--color-glow) 120%);
 }
 
+/* gradient border card */
+.border-glow {
+  position: relative;
+  background: var(--color-card);
+  border-radius: 1.5rem;
+}
+.border-glow::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(120deg, var(--color-violet), var(--color-rose-bright), var(--color-glow));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events: none;
+}
+
 /* ---------- Buttons ---------- */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  font-weight: 600;
-  border-radius: 9999px;
-  padding: 0.9rem 1.6rem;
-  font-size: 0.98rem;
-  line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  font-weight: 600; border-radius: 9999px; padding: 0.9rem 1.6rem;
+  font-size: 0.98rem; line-height: 1;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  cursor: pointer;
-  text-align: center;
+  cursor: pointer; text-align: center;
+  will-change: transform;
 }
 .btn-primary {
   color: #fff;
   background: linear-gradient(120deg, var(--color-violet), var(--color-rose) 70%, var(--color-glow));
+  background-size: 160% auto;
   box-shadow: 0 10px 30px -8px rgba(124, 58, 237, 0.55);
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -10px rgba(219, 39, 119, 0.6); }
+.btn-primary:hover { transform: translateY(-2px); background-position: right center; box-shadow: 0 16px 40px -10px rgba(219, 39, 119, 0.6); }
 .btn-ghost {
-  color: var(--color-plum);
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid var(--color-lavender);
-  backdrop-filter: blur(8px);
+  color: var(--color-plum); background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--color-lavender); backdrop-filter: blur(8px);
 }
 .btn-ghost:hover { transform: translateY(-2px); background: #fff; border-color: var(--color-violet-bright); }
 
@@ -153,6 +173,14 @@ h1, h2, h3, h4 {
 .container-x { width: 100%; max-width: 76rem; margin-inline: auto; padding-inline: 1.5rem; }
 .section { padding-block: clamp(4rem, 9vw, 7rem); position: relative; }
 
+/* ---------- Chips / pills ---------- */
+.chip {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.72rem; font-weight: 600;
+  padding: 0.3rem 0.7rem; border-radius: 9999px;
+  background: var(--color-lavender-soft); color: var(--color-violet);
+}
+
 /* ---------- Reveal on scroll ---------- */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.is-visible { opacity: 1; transform: none; }
@@ -160,9 +188,48 @@ h1, h2, h3, h4 {
 .reveal-delay-2 { transition-delay: 0.16s; }
 .reveal-delay-3 { transition-delay: 0.24s; }
 
-/* ---------- Marquee (trust logos / stats strip) ---------- */
+/* ---------- Floaty ---------- */
 @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 .floaty { animation: floaty 6s ease-in-out infinite; }
+
+/* ---------- Marquee ---------- */
+.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee__track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
+.marquee:hover .marquee__track { animation-play-state: paused; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ---------- Before/After slider ---------- */
+.ba { position: relative; user-select: none; touch-action: pan-y; border-radius: 1.25rem; overflow: hidden; }
+.ba__layer { position: absolute; inset: 0; }
+.ba__before { z-index: 2; }             /* clipped from the right */
+.ba__handle {
+  position: absolute; top: 0; bottom: 0; z-index: 3;
+  width: 2px; background: #fff; box-shadow: 0 0 0 1px rgba(124,58,237,0.4);
+  transform: translateX(-1px);
+}
+.ba__grip {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 2.6rem; height: 2.6rem; border-radius: 9999px;
+  background: #fff; display: grid; place-items: center;
+  box-shadow: 0 6px 20px -4px rgba(76,29,107,0.5); color: var(--color-violet);
+}
+.ba__range {
+  position: absolute; inset: 0; z-index: 4; width: 100%; height: 100%;
+  margin: 0; opacity: 0; cursor: ew-resize;
+}
+.ba__tag {
+  position: absolute; top: 0.75rem; z-index: 3;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.25rem 0.6rem; border-radius: 9999px; color: #fff;
+}
+
+/* mini résumé mock elements */
+.rz { position: absolute; inset: 0; padding: 1.1rem 1.25rem; font-size: 0.6rem; }
+.rz-line { height: 0.42rem; border-radius: 3px; }
+
+/* ---------- Nav scrolled state ---------- */
+#siteNav { transition: box-shadow 0.3s ease, background 0.3s ease; }
+#siteNav.scrolled { box-shadow: 0 8px 30px -12px rgba(76,29,107,0.25); }
 
 /* ---------- FAQ accordion ---------- */
 details.faq { border-bottom: 1px solid rgba(196, 181, 253, 0.5); }
@@ -171,10 +238,10 @@ details.faq summary::-webkit-details-marker { display: none; }
 details.faq .chev { transition: transform 0.25s ease; }
 details.faq[open] .chev { transform: rotate(180deg); }
 
-/* ---------- Accessibility: reduced motion ---------- */
+/* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .floaty { animation: none; }
+  .floaty, .marquee__track, .text-gradient { animation: none; }
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }

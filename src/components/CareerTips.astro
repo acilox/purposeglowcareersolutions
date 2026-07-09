@@ -1,4 +1,5 @@
 ---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const tips = [
   { title: 'Mirror the job description', body: 'ATS software ranks you on keywords. Echo the exact skills and titles from the posting (honestly) so you clear the first filter.' },
   { title: 'Lead with results, not duties', body: 'Swap "responsible for scheduling" for "cut scheduling errors 30%." Numbers make a recruiter stop scrolling.' },
@@ -27,6 +28,7 @@ const tips = [
             </div>
           ))}
         </div>
+        <a href={`${base}/checklist`} class="btn btn-ghost mt-7">Get the free 20-point checklist →</a>
       </div>
 
       <!-- STAR method card -->

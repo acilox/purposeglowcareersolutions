@@ -1,11 +1,11 @@
 ---
 const features = [
-  { icon: '🎯', title: 'ATS-Friendly by Design', body: 'Formatted and keyword-optimized to pass applicant tracking systems — then written to impress the human who reads it next.' },
-  { icon: '🤝', title: 'One-on-One Support', body: 'You work directly with Nicole — no templates on autopilot. Every document is tailored to your goals and voice.' },
-  { icon: '⚡', title: '24-Hour Turnaround', body: 'Need it fast? Most résumés are delivered within a day, so you never miss a deadline or an opportunity.' },
-  { icon: '🩺', title: 'Career-Change Specialist', body: '10+ years in healthcare & operations means I know how to translate your experience — including big pivots — into transferable strengths.' },
-  { icon: '📄', title: 'PDF + Word, Every Time', body: 'You get polished, editable files in both formats so you can apply anywhere with confidence.' },
-  { icon: '💡', title: 'Strategy, Not Just Words', body: 'More than a résumé: a clear positioning strategy for your next opportunity, from bullet points to personal brand.' },
+  { icon: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.5" fill="currentColor"/>', title: 'ATS-Friendly by Design', body: 'Formatted and keyword-optimized to pass applicant tracking systems — then written to impress the human who reads it next.' },
+  { icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>', title: 'One-on-One Support', body: 'You work directly with Nicole — no templates on autopilot. Every document is tailored to your goals and voice.' },
+  { icon: '<path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/>', title: '24-Hour Turnaround', body: 'Need it fast? Most résumés are delivered within a day, so you never miss a deadline or an opportunity.' },
+  { icon: '<path d="M19 14c1.5-1.5 3-3.3 3-5.5A4.5 4.5 0 0 0 12 5 4.5 4.5 0 0 0 2 8.5c0 2.2 1.5 4 3 5.5l7 7Z"/>', title: 'Career-Change Specialist', body: '10+ years in healthcare & operations means I know how to translate your experience — including big pivots — into transferable strengths.' },
+  { icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/>', title: 'PDF + Word, Every Time', body: 'You get polished, editable files in both formats so you can apply anywhere with confidence.' },
+  { icon: '<path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2h6c0-.8.4-1.5 1-2A7 7 0 0 0 12 2Z"/>', title: 'Strategy, Not Just Words', body: 'More than a résumé: a clear positioning strategy for your next opportunity, from bullet points to personal brand.' },
 ];
 ---
 
@@ -20,7 +20,9 @@ const features = [
     <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {features.map((f, i) => (
         <div class={`card card-hover p-7 reveal reveal-delay-${(i % 3) + 1}`}>
-          <div class="w-12 h-12 rounded-2xl bg-lavender-soft grid place-items-center text-2xl">{f.icon}</div>
+          <div class="w-12 h-12 rounded-2xl bg-lavender-soft grid place-items-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={f.icon} />
+          </div>
           <h3 class="mt-5 text-xl">{f.title}</h3>
           <p class="mt-2.5 text-ink/70 leading-relaxed">{f.body}</p>
         </div>

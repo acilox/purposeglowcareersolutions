@@ -1,0 +1,27 @@
+---
+const wins = [
+  '3 interviews in one week',
+  'Nurse → Healthcare Admin',
+  'Career-changer into tech',
+  'Landed a director role in 10 weeks',
+  '95% interview rate',
+  'Callbacks within days',
+  'Nurse → Healthcare leadership',
+  'From overlooked to hired',
+];
+// Duplicate the list so the marquee loops seamlessly (-50% translate).
+const loop = [...wins, ...wins];
+---
+
+<section aria-label="Client wins" class="py-6 border-y border-lavender/50 bg-white/50">
+  <div class="marquee">
+    <div class="marquee__track">
+      {loop.map((w) => (
+        <span class="flex items-center gap-3 px-6 whitespace-nowrap">
+          <span class="text-glow">✦</span>
+          <span class="font-display text-lg md:text-xl text-plum">{w}</span>
+        </span>
+      ))}
+    </div>
+  </div>
+</section>
