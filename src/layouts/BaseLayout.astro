@@ -1,0 +1,144 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/fraunces';
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Purpose & Glow Career Solutions | Professional Résumé Writing by Nicole',
+  description = 'ATS-friendly résumé writing, cover letters & LinkedIn optimization by Nicole. 75+ résumés transformed, 95% interview rate, 24-hour turnaround. Stand out and land your dream job.',
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, ''); // normalize: no trailing slash
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+// JSON-LD — ProfessionalService for a solo résumé writer (playbook §5).
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: site.name,
+  alternateName: 'Resume Glow Up by Nicole',
+  description,
+  url: canonical,
+  email: site.email,
+  founder: { '@type': 'Person', name: site.owner },
+  areaServed: 'US',
+  priceRange: '$75–$140',
+  sameAs: [site.socials.instagram, site.socials.linkedin, site.socials.facebook],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5',
+    reviewCount: '8',
+    bestRating: '5',
+  },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Unlisted while in testing — remove noindex at go-live/handoff. -->
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${base}/og.svg`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${base}/og.svg`} />
+
+    <meta name="theme-color" content="#7c3aed" />
+    <set:html value={`<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`} />
+  </head>
+  <body>
+    <div class="glow-field" aria-hidden="true">
+      <span class="glow-orb glow-orb--1 floaty"></span>
+      <span class="glow-orb glow-orb--2"></span>
+      <span class="glow-orb glow-orb--3 floaty"></span>
+    </div>
+
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-3 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2">Skip to content</a>
+
+    <slot />
+
+    <script is:inline>
+      // Reveal-on-scroll (respects reduced-motion via CSS).
+      (function () {
+        const els = document.querySelectorAll('.reveal');
+        if (!('IntersectionObserver' in window) || !els.length) {
+          els.forEach((el) => el.classList.add('is-visible'));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+        );
+        els.forEach((el) => io.observe(el));
+      })();
+
+      // Count-up for stat numbers.
+      (function () {
+        const nums = document.querySelectorAll('[data-count]');
+        if (!nums.length) return;
+        const run = (el) => {
+          const target = parseFloat(el.getAttribute('data-count'));
+          const suffix = el.getAttribute('data-suffix') || '';
+          const dur = 1400;
+          const start = performance.now();
+          const step = (now) => {
+            const p = Math.min((now - start) / dur, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            const val = target % 1 === 0 ? Math.round(target * eased) : (target * eased).toFixed(1);
+            el.textContent = val + suffix;
+            if (p < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        };
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) { run(e.target); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.5 });
+        nums.forEach((n) => io.observe(n));
+      })();
+
+      // Mobile nav toggle.
+      (function () {
+        const btn = document.getElementById('navToggle');
+        const menu = document.getElementById('mobileMenu');
+        if (!btn || !menu) return;
+        btn.addEventListener('click', () => {
+          const open = menu.classList.toggle('hidden') === false;
+          btn.setAttribute('aria-expanded', String(open));
+        });
+        menu.querySelectorAll('a').forEach((a) =>
+          a.addEventListener('click', () => menu.classList.add('hidden'))
+        );
+      })();
+    </script>
+  </body>
+</html>

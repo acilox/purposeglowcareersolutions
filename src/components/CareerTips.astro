@@ -1,0 +1,58 @@
+---
+const tips = [
+  { title: 'Mirror the job description', body: 'ATS software ranks you on keywords. Echo the exact skills and titles from the posting (honestly) so you clear the first filter.' },
+  { title: 'Lead with results, not duties', body: 'Swap "responsible for scheduling" for "cut scheduling errors 30%." Numbers make a recruiter stop scrolling.' },
+  { title: 'Keep it clean & scannable', body: 'One font family, clear sections, no tables or graphics that confuse ATS parsers. Simple reads as senior.' },
+];
+---
+
+<section id="career-tips" class="section">
+  <div class="container-x">
+    <div class="grid lg:grid-cols-[1fr_1.1fr] gap-12 items-start">
+      <div class="reveal">
+        <p class="eyebrow text-rose">Free career tips</p>
+        <h2 class="display-2 mt-3">A little glow, on the house.</h2>
+        <p class="mt-5 text-lg text-ink/75">
+          Three quick wins you can apply to your résumé today — no purchase required. Ready for the full
+          transformation? I'll handle the rest.
+        </p>
+        <div class="mt-8 space-y-4">
+          {tips.map((t, i) => (
+            <div class={`card p-5 flex gap-4 reveal reveal-delay-${i + 1}`}>
+              <span class="font-display text-2xl font-bold text-gradient shrink-0">{i + 1}</span>
+              <div>
+                <h3 class="text-lg">{t.title}</h3>
+                <p class="mt-1 text-sm text-ink/70">{t.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- STAR method card -->
+      <div class="card p-8 md:p-10 reveal reveal-delay-1 bg-lavender-soft/50">
+        <h3 class="text-2xl">Write bullet points that shine: the <span class="text-gradient">STAR</span> method</h3>
+        <p class="mt-3 text-ink/70">The formula I use to turn everyday tasks into interview-winning achievements.</p>
+        <dl class="mt-6 space-y-4">
+          {[
+            ['S', 'Situation', 'Set the scene in a few words.'],
+            ['T', 'Task', 'What were you responsible for?'],
+            ['A', 'Action', 'What did you specifically do?'],
+            ['R', 'Result', 'The measurable outcome — quantify it!'],
+          ].map(([l, term, def]) => (
+            <div class="flex gap-4 items-start">
+              <span class="w-10 h-10 shrink-0 rounded-xl bg-gradient-glow text-white grid place-items-center font-display font-bold text-lg">{l}</span>
+              <div>
+                <dt class="font-semibold text-plum">{term}</dt>
+                <dd class="text-sm text-ink/70">{def}</dd>
+              </div>
+            </div>
+          ))}
+        </dl>
+        <div class="mt-6 rounded-2xl bg-white/70 border border-lavender p-4 text-sm text-ink/75">
+          <span class="font-semibold text-plum">Example:</span> "Redesigned patient billing workflow (A), reducing claim denials by 30% and recovering $120K in revenue (R)."
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

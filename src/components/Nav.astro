@@ -1,0 +1,46 @@
+---
+import { site } from '../data/site';
+
+const links = [
+  { href: '#services', label: 'Services' },
+  { href: '#process', label: 'How It Works' },
+  { href: '#about', label: 'About' },
+  { href: '#results', label: 'Results' },
+  { href: '#faq', label: 'FAQ' },
+];
+---
+
+<header class="fixed top-0 inset-x-0 z-40">
+  <nav class="glass border-b border-white/50">
+    <div class="container-x flex items-center justify-between h-[4.5rem]">
+      <a href="#top" class="flex items-center gap-2.5 font-display text-lg font-semibold text-plum">
+        <span class="grid place-items-center w-9 h-9 rounded-xl bg-gradient-glow text-white text-lg">✦</span>
+        Purpose&nbsp;<span class="text-gradient">&amp; Glow</span>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-7 text-sm font-medium text-ink/80">
+        {links.map((l) => (
+          <li><a href={l.href} class="hover:text-violet transition-colors">{l.label}</a></li>
+        ))}
+      </ul>
+
+      <div class="flex items-center gap-3">
+        <a href={site.intakeForm} target="_blank" rel="noopener" class="btn btn-primary hidden sm:inline-flex !py-2.5 !px-5 text-sm">
+          Start Your Glow Up
+        </a>
+        <button id="navToggle" class="md:hidden grid place-items-center w-10 h-10 rounded-lg border border-lavender bg-white/70" aria-label="Menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-plum"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="hidden md:hidden border-t border-white/50 bg-white/90 backdrop-blur">
+      <ul class="container-x py-4 flex flex-col gap-1 text-ink/85">
+        {links.map((l) => (
+          <li><a href={l.href} class="block py-2.5 font-medium hover:text-violet">{l.label}</a></li>
+        ))}
+        <li class="pt-2"><a href={site.intakeForm} target="_blank" rel="noopener" class="btn btn-primary w-full">Start Your Glow Up</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>

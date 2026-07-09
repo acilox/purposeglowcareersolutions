@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Purpose & Glow Career Solutions — design system
+   Brand: warm, radiant, feminine, trustworthy. Lavender + rose
+   + a gold "glow" accent. Elegant serif display + clean sans body.
+   ============================================================ */
+
+@theme {
+  /* Palette */
+  --color-ink: #2a1b3d;          /* deep aubergine — body text */
+  --color-plum: #4c1d6b;         /* headings */
+  --color-violet: #7c3aed;       /* primary brand */
+  --color-violet-bright: #a78bfa;
+  --color-lavender: #c4b5fd;
+  --color-lavender-soft: #ede9fe;
+  --color-rose: #db2777;         /* rose accent */
+  --color-rose-bright: #ec4899;
+  --color-rose-soft: #fbcfe8;
+  --color-glow: #f59e0b;         /* gold glow */
+  --color-peach: #fdba74;
+  --color-cream: #fcfaff;        /* page background */
+  --color-card: #ffffff;
+
+  /* Type */
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Fraunces Variable", ui-serif, Georgia, "Times New Roman", serif;
+}
+
+/* ---------- Base ---------- */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem; /* offset sticky nav on anchor jumps */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-lavender);
+  color: var(--color-plum);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--color-plum);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+/* Fluid display type */
+.display-1 { font-size: clamp(2.6rem, 6vw, 4.75rem); }
+.display-2 { font-size: clamp(2rem, 4.5vw, 3.25rem); }
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+/* ---------- Glow background ---------- */
+/* Soft radial "glow" orbs fixed behind everything — zero image weight. */
+.glow-field {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.glow-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.55;
+}
+.glow-orb--1 { width: 40rem; height: 40rem; top: -12rem; right: -10rem;
+  background: radial-gradient(circle at 30% 30%, #ddd6fe, transparent 70%); }
+.glow-orb--2 { width: 34rem; height: 34rem; top: 30%; left: -14rem;
+  background: radial-gradient(circle at 50% 50%, #fbcfe8, transparent 70%); }
+.glow-orb--3 { width: 30rem; height: 30rem; bottom: -8rem; right: 10%;
+  background: radial-gradient(circle at 50% 50%, #fde68a, transparent 72%); opacity: 0.4; }
+
+/* ---------- Gradient helpers ---------- */
+.text-gradient {
+  background: linear-gradient(100deg, var(--color-violet) 0%, var(--color-rose-bright) 55%, var(--color-glow) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.bg-gradient-glow {
+  background: linear-gradient(120deg, var(--color-violet) 0%, var(--color-rose) 60%, var(--color-glow) 120%);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 0.9rem 1.6rem;
+  font-size: 0.98rem;
+  line-height: 1;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+  text-align: center;
+}
+.btn-primary {
+  color: #fff;
+  background: linear-gradient(120deg, var(--color-violet), var(--color-rose) 70%, var(--color-glow));
+  box-shadow: 0 10px 30px -8px rgba(124, 58, 237, 0.55);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -10px rgba(219, 39, 119, 0.6); }
+.btn-ghost {
+  color: var(--color-plum);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--color-lavender);
+  backdrop-filter: blur(8px);
+}
+.btn-ghost:hover { transform: translateY(-2px); background: #fff; border-color: var(--color-violet-bright); }
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--color-card);
+  border: 1px solid rgba(196, 181, 253, 0.35);
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 45px -28px rgba(76, 29, 107, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px -30px rgba(124, 58, 237, 0.45);
+  border-color: var(--color-violet-bright);
+}
+.glass {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* ---------- Layout ---------- */
+.container-x { width: 100%; max-width: 76rem; margin-inline: auto; padding-inline: 1.5rem; }
+.section { padding-block: clamp(4rem, 9vw, 7rem); position: relative; }
+
+/* ---------- Reveal on scroll ---------- */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.is-visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+
+/* ---------- Marquee (trust logos / stats strip) ---------- */
+@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.floaty { animation: floaty 6s ease-in-out infinite; }
+
+/* ---------- FAQ accordion ---------- */
+details.faq { border-bottom: 1px solid rgba(196, 181, 253, 0.5); }
+details.faq summary { list-style: none; cursor: pointer; }
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq .chev { transition: transform 0.25s ease; }
+details.faq[open] .chev { transform: rotate(180deg); }
+
+/* ---------- Accessibility: reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .floaty { animation: none; }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}

@@ -1,0 +1,65 @@
+---
+import { mailto } from '../data/site';
+
+const results = [
+  { value: 75, suffix: '+', label: 'Résumés transformed' },
+  { value: 95, suffix: '%', label: 'Interview rate' },
+  { value: 24, suffix: 'h', label: 'Turnaround' },
+  { value: 5, suffix: '★', label: 'Client rating' },
+];
+---
+
+<section id="about" class="section">
+  <div class="container-x grid lg:grid-cols-[0.85fr_1.15fr] gap-14 items-center">
+    <!-- Photo -->
+    <div class="reveal">
+      <div class="relative max-w-sm mx-auto">
+        <!--
+          TODO: Replace this placeholder with Nicole's real headshot for maximum trust.
+          Add the file to src/assets/nicole.jpg and swap this block for:
+            import { Image } from 'astro:assets';
+            import nicole from '../assets/nicole.jpg';
+            <Image src={nicole} alt="Nicole, founder of Purpose & Glow Career Solutions" class="rounded-[2rem] w-full" />
+        -->
+        <div class="aspect-[4/5] rounded-[2rem] bg-gradient-glow grid place-items-center relative overflow-hidden">
+          <span class="font-display text-[7rem] text-white/90">N</span>
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.35),transparent_60%)]"></div>
+        </div>
+        <div class="absolute -bottom-5 -right-3 card glass px-5 py-4 rotate-[3deg]">
+          <div class="text-sm font-semibold text-plum">Nicole Gotsch</div>
+          <div class="text-xs text-ink/65">Founder & Résumé Strategist</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bio -->
+    <div class="reveal reveal-delay-1">
+      <p class="eyebrow text-rose">Meet your career partner</p>
+      <h2 class="display-2 mt-3">Hi, I'm Nicole.</h2>
+      <div class="mt-5 space-y-4 text-lg text-ink/75">
+        <p>
+          After <strong class="text-plum">10+ years</strong> in healthcare revenue cycle and insurance
+          operations, I know exactly what it takes to turn dense, complicated experience into a clear,
+          compelling story — the same skill your résumé needs.
+        </p>
+        <p>
+          I started Purpose & Glow to help people stop feeling invisible in the application pile. Whether
+          you're switching industries, stepping into leadership, or just tired of hearing nothing back,
+          I'll help you present your value with clarity and confidence.
+        </p>
+        <p class="text-plum font-medium">Because you deserve to feel proud every time you click <em>Submit Application</em>.</p>
+      </div>
+
+      <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {results.map((r) => (
+          <div class="card p-5 text-center">
+            <div class="font-display text-3xl font-bold text-gradient" data-count={r.value} data-suffix={r.suffix}>0{r.suffix}</div>
+            <div class="mt-1 text-xs text-ink/65">{r.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <a href={mailto} class="btn btn-ghost mt-8">Have a question? Message me →</a>
+    </div>
+  </div>
+</section>

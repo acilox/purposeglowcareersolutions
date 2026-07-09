@@ -1,0 +1,41 @@
+---
+// Testimonials sourced from Nicole's existing site (real clients).
+// NOTE: quotes are reconstructed from published snippets — Nicole should
+// confirm exact wording / permission before go-live.
+const testimonials = [
+  { quote: 'Services that actually get interviews! Nicole knows exactly what recruiters are looking for.', name: 'Michelle Dennie', role: 'Verified Client', featured: true },
+  { quote: 'Got me three interviews in one week. Absolute game changer!', name: 'Erin', role: 'Résumé Client', featured: true },
+  { quote: 'Nurse to healthcare admin — Nicole highlighted my transferable skills perfectly.', name: 'Nadjeda', role: 'Career Changer' },
+  { quote: 'Career changer into tech, and Nicole made it happen. I finally felt confident applying.', name: 'Tara', role: 'Career Changer' },
+  { quote: 'Fast turnaround and delivered in both PDF and Word formats. So easy to work with.', name: 'Destinee Hirschman', role: 'Résumé Client' },
+  { quote: 'She opened doors for healthcare leadership roles I didn’t think I was ready for.', name: 'Nikki, MHA, RN-BSN', role: 'Healthcare Leader' },
+  { quote: 'My résumé finally looks like the professional I am. Thank you, Nicole!', name: 'Shealynn', role: 'Résumé Revamp Client' },
+  { quote: 'The optimization made a real difference — more callbacks almost immediately.', name: 'Nour', role: 'Résumé Optimization Client' },
+];
+---
+
+<section id="results" class="section">
+  <div class="container-x">
+    <div class="max-w-2xl reveal">
+      <p class="eyebrow text-violet">Real results, real people</p>
+      <h2 class="display-2 mt-3">Loved by job seekers ready to glow.</h2>
+      <p class="mt-5 text-lg text-ink/75">From career changers to healthcare leaders — here's what happens when your résumé finally works as hard as you do.</p>
+    </div>
+
+    <div class="mt-12 columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
+      {testimonials.map((t) => (
+        <figure class={`card card-hover p-6 mb-5 break-inside-avoid ${t.featured ? 'bg-lavender-soft/60' : ''}`}>
+          <div class="text-glow text-sm mb-3">★★★★★</div>
+          <blockquote class="text-ink/85 leading-relaxed">"{t.quote}"</blockquote>
+          <figcaption class="mt-4 flex items-center gap-3">
+            <span class="w-9 h-9 rounded-full bg-gradient-glow grid place-items-center text-white text-sm font-semibold">{t.name.charAt(0)}</span>
+            <span>
+              <span class="block text-sm font-semibold text-plum">{t.name}</span>
+              <span class="block text-xs text-ink/60">{t.role}</span>
+            </span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

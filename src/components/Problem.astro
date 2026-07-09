@@ -1,0 +1,30 @@
+---
+const stats = [
+  { value: 77, suffix: '%', label: 'of recruiters use ATS software to screen résumés before a human ever sees them' },
+  { value: 6, suffix: ' sec', label: 'is all the time a recruiter spends scanning your résumé on average' },
+  { value: 2.6, suffix: 'M', label: 'résumés are submitted every single day — yours has to stand out' },
+  { value: 2, suffix: '×', label: 'more interviews from a professionally written, keyword-optimized résumé' },
+];
+---
+
+<section class="section">
+  <div class="container-x">
+    <div class="max-w-2xl reveal">
+      <p class="eyebrow text-rose">The reality</p>
+      <h2 class="display-2 mt-3">Your résumé might be quietly costing you interviews.</h2>
+      <p class="mt-5 text-lg text-ink/75">
+        Most great candidates get filtered out before a person ever reads their story — not because they
+        aren't qualified, but because their résumé isn't built for how hiring actually works today.
+      </p>
+    </div>
+
+    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {stats.map((s, i) => (
+        <div class={`card card-hover p-6 reveal reveal-delay-${(i % 3) + 1}`}>
+          <div class="font-display text-4xl font-bold text-gradient" data-count={s.value} data-suffix={s.suffix}>0{s.suffix}</div>
+          <p class="mt-3 text-sm text-ink/70 leading-relaxed">{s.label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

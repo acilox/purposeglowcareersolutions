@@ -1,0 +1,31 @@
+---
+const faqs = [
+  { q: 'How does the process work?', a: 'You fill out a short intake form with your goals and current résumé. I write and design your new documents — usually within 24 hours — and send you polished PDF and Word files, ready to apply.' },
+  { q: 'What’s the turnaround time?', a: 'Most résumés are delivered within 24 hours of receiving your completed intake form. Need something urgently? Just let me know and I’ll do my best to accommodate.' },
+  { q: 'Will my résumé pass ATS software?', a: 'Yes. Every résumé is formatted and keyword-optimized to pass applicant tracking systems — while still reading beautifully for the human recruiter on the other side.' },
+  { q: 'I’m changing careers. Can you still help?', a: 'Absolutely — it’s a specialty of mine. With 10+ years across healthcare and operations, I know how to spotlight your transferable skills so a career pivot reads as a strength, not a gap.' },
+  { q: 'What do I get, and in what format?', a: 'You receive your finished résumé (and any add-ons like a cover letter or LinkedIn optimization) in both PDF and editable Word formats, so you can apply anywhere with confidence.' },
+  { q: 'How do I pay?', a: 'Payment is simple and secure via Venmo or a Square invoice sent to your email. You’ll get all the details after your intake.' },
+];
+---
+
+<section id="faq" class="section">
+  <div class="container-x max-w-3xl">
+    <div class="text-center reveal">
+      <p class="eyebrow text-violet">Questions?</p>
+      <h2 class="display-2 mt-3">Everything you might be wondering.</h2>
+    </div>
+
+    <div class="mt-10 card overflow-hidden reveal reveal-delay-1">
+      {faqs.map((f) => (
+        <details class="faq group px-6">
+          <summary class="flex items-center justify-between gap-4 py-5 text-left">
+            <span class="font-semibold text-plum text-lg">{f.q}</span>
+            <svg class="chev shrink-0 text-violet" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </summary>
+          <p class="pb-5 -mt-1 text-ink/70 leading-relaxed">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

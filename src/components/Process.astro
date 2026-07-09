@@ -1,0 +1,32 @@
+---
+import { site } from '../data/site';
+
+const steps = [
+  { n: '01', title: 'Share your story', body: 'Fill out a quick intake form with your goals, target roles, and current résumé. It takes just a few minutes.' },
+  { n: '02', title: 'I craft your glow up', body: 'I write and design an ATS-friendly, achievement-focused résumé tailored to you — usually within 24 hours.' },
+  { n: '03', title: 'Apply with confidence', body: 'You receive polished PDF + Word files, ready to send. Land more interviews and step into your next role.' },
+];
+---
+
+<section id="process" class="section">
+  <div class="container-x">
+    <div class="max-w-2xl reveal">
+      <p class="eyebrow text-violet">How it works</p>
+      <h2 class="display-2 mt-3">From overlooked to interview-ready in three steps.</h2>
+    </div>
+
+    <div class="mt-12 grid md:grid-cols-3 gap-6 relative">
+      {steps.map((s, i) => (
+        <div class={`card card-hover p-8 reveal reveal-delay-${(i % 3) + 1}`}>
+          <span class="font-display text-5xl font-bold text-lavender">{s.n}</span>
+          <h3 class="mt-3 text-xl">{s.title}</h3>
+          <p class="mt-2.5 text-ink/70 leading-relaxed">{s.body}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10 text-center reveal">
+      <a href={site.intakeForm} target="_blank" rel="noopener" class="btn btn-primary">Begin Your Glow Up ✦</a>
+    </div>
+  </div>
+</section>
