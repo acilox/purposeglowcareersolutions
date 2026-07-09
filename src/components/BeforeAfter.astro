@@ -1,6 +1,8 @@
 ---
 import { site } from '../data/site';
-// Generic example résumé (not a real person) used only to demonstrate the transformation.
+// Generic example résumé (not a real person), used only to demonstrate the transformation.
+const grayLine = (w: string) => `height:0.5rem;border-radius:3px;background:#d4d4d8;margin-top:0.34rem;width:${w}`;
+const softLine = (w: string) => `height:0.5rem;border-radius:3px;background:#ece7f7;margin-top:0.34rem;width:${w}`;
 ---
 
 <section id="glowup" class="section">
@@ -9,45 +11,49 @@ import { site } from '../data/site';
       <span class="chip">✦ See the transformation</span>
       <h2 class="display-2 mt-4">Watch an ordinary résumé <span class="text-gradient">glow up</span>.</h2>
       <p class="mt-5 text-lg text-ink/75">
-        Drag the slider to see the difference a strategic rewrite makes — from a cramped wall of text
-        that ATS software skips, to a clean, keyword-rich résumé recruiters actually read.
+        Drag the slider to compare — from a cramped wall of gray text that ATS software skips, to a clean,
+        keyword-rich résumé recruiters actually read.
       </p>
     </div>
 
-    <div class="mt-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
-      <!-- The comparison slider -->
+    <div class="mt-10 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center">
+      <!-- Comparison slider -->
       <div class="reveal reveal-delay-1">
-        <div data-ba class="ba card mx-auto w-full max-w-xl aspect-[4/5] bg-white">
-          <!-- AFTER (bottom layer, fully visible on the right) -->
-          <div class="ba__layer ba__after">
-            <div class="rz">
-              <div class="flex items-start gap-3 pb-2 border-b-2" style="border-color:var(--color-lavender)">
-                <div class="w-9 h-9 rounded-full bg-gradient-glow shrink-0"></div>
-                <div class="flex-1">
-                  <div class="font-display font-bold" style="color:var(--color-plum);font-size:0.95rem;line-height:1">Jordan Reyes</div>
-                  <div style="color:var(--color-rose);font-weight:600;font-size:0.62rem">Registered Nurse → Healthcare Administrator</div>
+        <div data-ba class="ba card mx-auto w-full max-w-lg aspect-[4/5]">
+          <!-- AFTER (bottom layer) -->
+          <div class="ba__layer ba__after" style="background:#fff">
+            <div class="rz" style="padding:1.35rem 1.45rem">
+              <div style="display:flex;align-items:center;gap:0.6rem;padding-bottom:0.7rem;border-bottom:2px solid var(--color-lavender)">
+                <div style="width:2.4rem;height:2.4rem;border-radius:9999px;flex:none;background:linear-gradient(120deg,var(--color-violet),var(--color-rose) 70%,var(--color-glow))"></div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-family:var(--font-display);font-weight:700;color:var(--color-plum);font-size:1.05rem;line-height:1.05">Jordan Reyes</div>
+                  <div style="color:var(--color-rose);font-weight:600;font-size:0.66rem;margin-top:2px">Registered Nurse → Healthcare Administrator</div>
                 </div>
-                <span class="text-[0.5rem] font-bold px-1.5 py-0.5 rounded-full" style="background:var(--color-lavender-soft);color:var(--color-violet)">ATS ✓</span>
+                <span style="font-size:0.55rem;font-weight:700;background:var(--color-lavender-soft);color:var(--color-violet);padding:2px 6px;border-radius:9999px;white-space:nowrap">ATS ✓</span>
               </div>
-              <div class="mt-2.5">
-                <div class="text-[0.6rem] font-bold uppercase tracking-wide" style="color:var(--color-violet)">Summary</div>
-                <div class="rz-line mt-1" style="width:100%;background:#e9e4f5"></div>
-                <div class="rz-line mt-1" style="width:88%;background:#e9e4f5"></div>
+
+              <div style="margin-top:0.9rem">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.05em;color:var(--color-violet)">SUMMARY</div>
+                <div style={softLine('100%')}></div>
+                <div style={softLine('86%')}></div>
               </div>
-              <div class="mt-2.5">
-                <div class="text-[0.6rem] font-bold uppercase tracking-wide" style="color:var(--color-violet)">Experience</div>
-                {[1,2,3].map(() => (
-                  <div class="flex gap-1.5 mt-1 items-start">
-                    <span class="mt-0.5 w-1.5 h-1.5 rounded-full shrink-0" style="background:var(--color-rose)"></span>
-                    <span class="rz-line" style="width:92%;background:#e9e4f5"></span>
+
+              <div style="margin-top:0.9rem">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.05em;color:var(--color-violet)">EXPERIENCE</div>
+                {[ '94%', '90%', '88%' ].map((w) => (
+                  <div style="display:flex;gap:0.4rem;align-items:center;margin-top:0.34rem">
+                    <span style="width:0.32rem;height:0.32rem;border-radius:9999px;flex:none;background:var(--color-rose)"></span>
+                    <span style={`height:0.5rem;border-radius:3px;background:#ece7f7;width:${w}`}></span>
                   </div>
                 ))}
+                <div style="margin-top:0.5rem;display:inline-block;font-size:0.58rem;font-weight:700;color:var(--color-plum);background:var(--color-rose-soft);padding:2px 7px;border-radius:9999px">↑ Recovered $120K · ↓ 30% denials</div>
               </div>
-              <div class="mt-2.5">
-                <div class="text-[0.6rem] font-bold uppercase tracking-wide" style="color:var(--color-violet)">Skills</div>
-                <div class="flex flex-wrap gap-1 mt-1">
-                  {['EMR','Compliance','Leadership','Billing','Patient Care'].map((s) => (
-                    <span class="text-[0.5rem] px-1.5 py-0.5 rounded-full" style="background:var(--color-rose-soft);color:var(--color-plum)">{s}</span>
+
+              <div style="margin-top:0.9rem">
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.05em;color:var(--color-violet)">SKILLS</div>
+                <div style="display:flex;flex-wrap:wrap;gap:0.25rem;margin-top:0.34rem">
+                  {['EMR','Compliance','Leadership','Medical Billing','Patient Care','Epic'].map((s) => (
+                    <span style="font-size:0.54rem;background:var(--color-lavender-soft);color:var(--color-plum);padding:2px 7px;border-radius:9999px">{s}</span>
                   ))}
                 </div>
               </div>
@@ -55,53 +61,46 @@ import { site } from '../data/site';
             <span class="ba__tag" style="right:0.75rem;background:var(--color-violet)">After ✦</span>
           </div>
 
-          <!-- BEFORE (top layer, clipped) -->
-          <div class="ba__layer ba__before bg-[#f3f3f3]">
-            <div class="rz" style="color:#8a8a8a">
-              <div class="text-center pb-1.5" style="border-bottom:1px solid #cfcfcf">
-                <div style="font-weight:700;color:#5a5a5a;font-size:0.8rem">JORDAN REYES</div>
-                <div style="font-size:0.55rem">jreyes@email.com · 555-0100 · City, ST</div>
+          <!-- BEFORE (top layer, clipped from the right) -->
+          <div class="ba__layer ba__before" style="background:#f4f4f5;clip-path:inset(0 50% 0 0)">
+            <div class="rz" style="padding:1.35rem 1.45rem;color:#9aa0a6">
+              <div style="text-align:center;padding-bottom:0.6rem;border-bottom:1px solid #d4d4d8">
+                <div style="font-weight:700;color:#52525b;font-size:0.95rem;letter-spacing:0.02em">JORDAN REYES</div>
+                <div style="font-size:0.6rem;margin-top:2px">jreyes@email.com · (555) 010-0100 · City, ST</div>
               </div>
-              <div class="mt-2">
-                <div style="font-size:0.58rem;font-weight:700;color:#6a6a6a">OBJECTIVE</div>
-                <div class="rz-line mt-1" style="width:100%;background:#d9d9d9"></div>
-                <div class="rz-line mt-1" style="width:97%;background:#d9d9d9"></div>
-                <div class="rz-line mt-1" style="width:99%;background:#d9d9d9"></div>
-                <div class="rz-line mt-1" style="width:70%;background:#d9d9d9"></div>
+              <div style="margin-top:0.85rem">
+                <div style="font-size:0.62rem;font-weight:700;color:#71717a">OBJECTIVE</div>
+                {['100%','99%','99%','72%'].map((w) => <div style={grayLine(w)}></div>)}
               </div>
-              <div class="mt-2">
-                <div style="font-size:0.58rem;font-weight:700;color:#6a6a6a">WORK HISTORY</div>
-                {[1,2,3,4,5,6].map(() => (
-                  <div class="rz-line mt-1" style="width:99%;background:#d9d9d9"></div>
-                ))}
+              <div style="margin-top:0.8rem">
+                <div style="font-size:0.62rem;font-weight:700;color:#71717a">WORK HISTORY</div>
+                {['99%','99%','99%','99%','99%'].map((w) => <div style={grayLine(w)}></div>)}
               </div>
-              <div class="mt-2">
-                <div style="font-size:0.58rem;font-weight:700;color:#6a6a6a">DUTIES</div>
-                {[1,2,3,4].map(() => (
-                  <div class="rz-line mt-1" style="width:99%;background:#d9d9d9"></div>
-                ))}
+              <div style="margin-top:0.8rem">
+                <div style="font-size:0.62rem;font-weight:700;color:#71717a">DUTIES</div>
+                {['99%','99%','80%'].map((w) => <div style={grayLine(w)}></div>)}
               </div>
             </div>
-            <span class="ba__tag" style="left:0.75rem;background:#9ca3af">Before</span>
+            <span class="ba__tag" style="left:0.75rem;background:#a1a1aa">Before</span>
           </div>
 
-          <!-- handle + range -->
+          <!-- Handle + range -->
           <div class="ba__handle" style="left:50%">
             <span class="ba__grip">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 6-4 6 4 6M15 6l4 6-4 6"/></svg>
             </span>
           </div>
-          <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Reveal before and after résumé" />
+          <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after résumé" />
         </div>
         <p class="text-center text-xs text-ink/50 mt-3">← drag to compare · illustrative example</p>
       </div>
 
-      <!-- What changed -->
+      <!-- What changes -->
       <div class="reveal reveal-delay-2">
         <h3 class="text-2xl">What actually changes</h3>
         <ul class="mt-5 space-y-4">
           {[
-            ['Beats the ATS', 'Right keywords and clean structure so software ranks you higher — not screens you out.'],
+            ['Beats the ATS', 'The right keywords and clean structure so software ranks you higher — not screens you out.'],
             ['Leads with results', 'Vague “duties” become quantified wins that make recruiters stop scrolling.'],
             ['Reads in 6 seconds', 'Clear sections and hierarchy guide the eye to what matters, fast.'],
             ['Looks the part', 'A polished, modern design that signals “senior” before a word is read.'],
@@ -114,7 +113,7 @@ import { site } from '../data/site';
             </li>
           ))}
         </ul>
-        <a href={site.intakeForm} target="_blank" rel="noopener" data-magnetic class="btn btn-primary mt-7">Glow up my résumé ✦</a>
+        <a href={site.intakeForm} target="_blank" rel="noopener" data-magnetic class="btn btn-primary mt-7 pulse-cta">Glow up my résumé ✦</a>
       </div>
     </div>
   </div>
