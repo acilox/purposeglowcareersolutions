@@ -132,13 +132,32 @@ const jsonLd = {
         const btn = document.getElementById('navToggle');
         const menu = document.getElementById('mobileMenu');
         if (!btn || !menu) return;
+        const close = () => { menu.classList.add('hidden'); menu.classList.remove('menu-open'); btn.setAttribute('aria-expanded', 'false'); };
         btn.addEventListener('click', () => {
-          const open = menu.classList.toggle('hidden') === false;
-          btn.setAttribute('aria-expanded', String(open));
+          const nowHidden = menu.classList.toggle('hidden');
+          if (nowHidden) { close(); }
+          else { menu.classList.add('menu-open'); btn.setAttribute('aria-expanded', 'true'); }
         });
-        menu.querySelectorAll('a').forEach((a) =>
-          a.addEventListener('click', () => menu.classList.add('hidden'))
-        );
+        menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
+      })();
+
+      // Rotating hero word.
+      (function () {
+        const el = document.getElementById('rotator');
+        if (!el) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const words = ['glow.', 'shine.', 'stand out.', 'get hired.'];
+        let i = 0;
+        setInterval(() => {
+          i = (i + 1) % words.length;
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(10px)';
+          setTimeout(() => {
+            el.textContent = words[i];
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          }, 350);
+        }, 2600);
       })();
 
       // Scroll progress bar + nav shadow.

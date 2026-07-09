@@ -13,34 +13,43 @@ const links = [
 
 <header class="fixed top-0 inset-x-0 z-40">
   <nav id="siteNav" class="glass border-b border-white/50">
-    <div class="container-x flex items-center justify-between h-[4.5rem]">
-      <a href="#top" class="flex items-center gap-2.5 font-display text-lg font-semibold text-plum">
-        <span class="grid place-items-center w-9 h-9 rounded-xl bg-gradient-glow text-white text-lg">✦</span>
-        Purpose&nbsp;<span class="text-gradient">&amp; Glow</span>
+    <div class="container-x flex items-center justify-between h-16 md:h-[4.5rem]">
+      <!-- Logo -->
+      <a href="#top" class="flex items-center gap-2 shrink-0">
+        <span class="grid place-items-center w-9 h-9 rounded-xl bg-gradient-glow text-white shadow-sm shrink-0">✦</span>
+        <span class="font-display font-semibold text-plum leading-none text-[1.05rem] sm:text-lg whitespace-nowrap">
+          Purpose <span class="text-gradient">&amp; Glow</span>
+        </span>
       </a>
 
+      <!-- Desktop links -->
       <ul class="hidden md:flex items-center gap-7 text-sm font-medium text-ink/80">
         {links.map((l) => (
           <li><a href={l.href} class="hover:text-violet transition-colors">{l.label}</a></li>
         ))}
       </ul>
 
-      <div class="flex items-center gap-3">
+      <!-- Actions -->
+      <div class="flex items-center gap-2.5">
         <a href={site.intakeForm} target="_blank" rel="noopener" data-magnetic class="btn btn-primary hidden sm:inline-flex !py-2.5 !px-5 text-sm">
           Start Your Glow Up
         </a>
-        <button id="navToggle" class="md:hidden grid place-items-center w-10 h-10 rounded-lg border border-lavender bg-white/70" aria-label="Menu" aria-expanded="false">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-plum"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <button id="navToggle" class="md:hidden grid place-items-center w-11 h-11 rounded-xl border border-lavender bg-white/80 text-plum active:scale-95 transition-transform" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <svg class="i-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          <svg class="i-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>
         </button>
       </div>
     </div>
 
-    <div id="mobileMenu" class="hidden md:hidden border-t border-white/50 bg-white/90 backdrop-blur">
-      <ul class="container-x py-4 flex flex-col gap-1 text-ink/85">
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-white/50 bg-white/95 backdrop-blur-lg">
+      <ul class="container-x py-3 flex flex-col text-ink/85">
         {links.map((l) => (
-          <li><a href={l.href} class="block py-2.5 font-medium hover:text-violet">{l.label}</a></li>
+          <li><a href={l.href} class="block py-3 font-medium hover:text-violet border-b border-lavender/30">{l.label}</a></li>
         ))}
-        <li class="pt-2"><a href={site.intakeForm} target="_blank" rel="noopener" class="btn btn-primary w-full">Start Your Glow Up</a></li>
+        <li class="pt-3 pb-1">
+          <a href={site.intakeForm} target="_blank" rel="noopener" class="btn btn-primary w-full">Start Your Glow Up ✦</a>
+        </li>
       </ul>
     </div>
   </nav>
